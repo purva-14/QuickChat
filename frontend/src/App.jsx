@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ChatPage from "./pages/ChatPage";
 import { useAuth } from "./context/AuthContext";
-import { requestNotificationPermission } from "./utils/notification";
+
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -19,9 +19,7 @@ function ProtectedRoute({ children }) {
 }
 
 export default function App() {
-  useEffect(() => {
-    requestNotificationPermission();
-  }, []);
+ 
 
   return (
     <Routes>
