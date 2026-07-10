@@ -19,7 +19,7 @@ const server = http.createServer(app);
 
 
 const allowedOrigins = [
-  "https://quickchat-swart.vercel.app",
+  "https://quick-chat-swart.vercel.app",
   "http://localhost:5173"
 ];
 
