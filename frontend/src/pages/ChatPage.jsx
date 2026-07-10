@@ -11,7 +11,7 @@ import MessageBubble from "../components/MessageBubble";
 import MessageInput from "../components/MessageInput";
 import TypingIndicator from "../components/TypingIndicator";
 import ProfilePanel from "../components/ProfilePanel";
-import { notifyNewMessage } from "../utils/notification";
+
 
 export default function ChatPage() {
   const { user, logout, updateUser } = useAuth();
@@ -22,8 +22,8 @@ export default function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [typingFrom, setTypingFrom] = useState(null);
   const [replyingTo, setReplyingTo] = useState(null);
-  // Drawer can show either "my profile in edit mode" or "the active contact's info"
-  const [profileDrawer, setProfileDrawer] = useState(null); // null | "edit-me" | "contact-info"
+ 
+  const [profileDrawer, setProfileDrawer] = useState(null); 
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -32,12 +32,12 @@ export default function ChatPage() {
   const activeUserRef = useRef(null);
   activeUserRef.current = activeUser;
 
-  // Load contact list
+ 
   useEffect(() => {
     api.get("/users").then(({ data }) => setUsers(data.users)).catch(() => toast.error("Could not load users"));
   }, []);
 
-  // Load conversation when switching users
+ 
   useEffect(() => {
     if (!activeUser) return;
     api
@@ -67,17 +67,15 @@ export default function ChatPage() {
   useEffect(() => {
     if (!socket) return;
 
-    const handleReceive = (message) => {
-      const senderId = message.sender?._id || message.sender;
-      if (activeUserRef.current && senderId === activeUserRef.current._id) {
-        setMessages((prev) => [...prev, message]);
-        socket.emit("message:seen", { messageIds: [message._id], senderId });
-      } else {
-        toast(`New message from ${message.senderName || "someone"}`, { icon: "💬" });
-      }
-      const sender = users.find((u) => u._id === senderId);
-      notifyNewMessage(sender?.fullName || "New message", message.text, sender?.avatar);
-    };
+   const handleReceive = (message) => {
+  const senderId = message.sender?._id || message.sender;
+  if (activeUserRef.current && senderId === activeUserRef.current._id) {
+    setMessages((prev) => [...prev, message]);
+    socket.emit("message:seen", { messageIds: [message._id], senderId });
+  } else {
+    toast(`New message from ${message.senderName || "someone"}`, { icon: "💬" });
+  }
+};
 
     const handleStatus = ({ messageId, status }) => {
       setMessages((prev) => prev.map((m) => (m._id === messageId ? { ...m, status } : m)));

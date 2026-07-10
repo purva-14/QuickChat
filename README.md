@@ -15,7 +15,7 @@ Full-stack real-time chat application built with **MongoDB, Express, React, Node
 - Message reactions (emoji, toggleable)
 - Dark mode (black + neon green, always-on theme)
 - Responsive UI (mobile sidebar collapses, desktop shows profile panel)
-- Browser notifications + sound ping for new messages when tab isn't focused
+
 
 ## Project structure
 ```

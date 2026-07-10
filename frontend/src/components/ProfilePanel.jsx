@@ -13,7 +13,7 @@ export default function ProfilePanel({ open, onClose, user, editable, startInEdi
   const [preview, setPreview] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  // Reset local form state whenever the drawer opens for a (possibly different) user
+  
   useEffect(() => {
     if (open) {
       setEditing(!!startInEditMode);

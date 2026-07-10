@@ -1,4 +1,4 @@
-// utils/formatLastSeen.js
+
 export function formatLastSeen(date) {
   const diffMs = Date.now() - new Date(date).getTime();
   const diffMin = Math.floor(diffMs / 60000);

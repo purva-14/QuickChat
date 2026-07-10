@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { HiOutlineInformationCircle, HiOutlineMagnifyingGlass } from "react-icons/hi2";
 import { useSocket } from "../context/SocketContext";
-import axios from "../api/axios"; // adjust to your actual axios instance path
+import axios from "../api/axios"; 
 
 const SERVER_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:5000";
 
@@ -21,7 +21,7 @@ export default function ChatHeader({ user, isOnline, isTyping, onToggleInfo, onT
   const [fetchedLastSeen, setFetchedLastSeen] = useState(null);
 
   useEffect(() => {
-    // Only hit the REST fallback if we don't already have it from a live socket event
+
     if (isOnline || lastSeenMap[user._id]) return;
 
     axios

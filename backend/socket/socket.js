@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Message = require("../models/Message");
 
-// userId -> socketId, so we can reach a specific user from anywhere
+
 const onlineUsers = new Map();
 
 const initSocket = (io) => {
-  // Authenticate every socket connection with the same JWT used for REST
+
   io.use(async (socket, next) => {
     try {
       const token = socket.handshake.auth?.token;
@@ -34,12 +34,12 @@ const initSocket = (io) => {
 
     // ---- Direct messaging ----
     socket.on("message:send", async (payload) => {
-      const { receiverId, message } = payload; // message is the saved Mongo doc from REST call
+      const { receiverId, message } = payload; 
       const receiverSocketId = onlineUsers.get(receiverId);
 
       if (receiverSocketId) {
         io.to(receiverSocketId).emit("message:receive", message);
-        // Mark delivered since receiver is online
+       
         await Message.findByIdAndUpdate(message._id, { status: "delivered" });
         io.to(socket.id).emit("message:status", { messageId: message._id, status: "delivered" });
       }

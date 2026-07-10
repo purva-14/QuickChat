@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await api.post("/auth/logout");
     } catch {
-      // ignore network errors on logout
+      
     }
     localStorage.removeItem("quickchat_token");
     localStorage.removeItem("quickchat_user");
